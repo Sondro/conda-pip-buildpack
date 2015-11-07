@@ -9,14 +9,14 @@ if [ ! -d /app/.heroku/miniconda ]; then
     export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
     conda config --set always_yes yes --set changeps1 no
     conda update --quiet conda | indent
+    conda config --add channels https://conda.anaconda.org/faph
+    conda config --add channels https://conda.anaconda.org/openhydrology
     conda info --all | indent
 fi
 
 
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
-    conda config --add channels https://conda.anaconda.org/faph
-    conda config --add channels https://conda.anaconda.org/openhydrology
     conda install --file conda-requirements.txt --quiet | indent
 fi
 
