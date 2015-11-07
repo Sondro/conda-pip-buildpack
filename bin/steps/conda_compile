@@ -11,8 +11,12 @@ puts-step "Configuring Miniconda"
 export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda | indent
-conda config --add channels https://conda.anaconda.org/faph
-conda config --add channels https://conda.anaconda.org/openhydrology
+
+if [ -f conda-channels.txt ]; then
+    while read CHANNEL; do
+        conda config --add channels $CHANNEL
+    done < "conda-channels.txt"
+fi
 conda info --all | indent
 
 if [ -f conda-requirements.txt ]; then
