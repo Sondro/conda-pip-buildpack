@@ -1,12 +1,13 @@
 MINICONDA_VER=3.9.1
 
 if [ ! -d /app/.heroku/miniconda ]; then
-    puts-step "Preparing Python3/Miniconda Environment ($MINICONDA_VER)"
+    puts-step "Installing Miniconda version $MINICONDA_VER"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 fi
 
+puts-step "Configuring Miniconda"
 export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda | indent
@@ -14,10 +15,14 @@ conda config --add channels https://conda.anaconda.org/faph
 conda config --add channels https://conda.anaconda.org/openhydrology
 conda info --all | indent
 
-
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
     conda install --file conda-requirements.txt --quiet | indent
+fi
+
+if [ -f requirements.txt ]; then
+    puts-step "Installing dependencies using pip"
+    pip install -r requirements.txt | indent
 fi
 
 puts-step "Cleaning up the installation environment."
