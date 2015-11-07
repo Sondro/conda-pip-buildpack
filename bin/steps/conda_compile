@@ -4,13 +4,15 @@ if [ ! -d /app/.heroku/miniconda ]; then
     bash Miniconda3-3.8.3-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
     rm -fr Miniconda3-3.8.3-Linux-x86_64.sh
 
-    conda install pip --yes | indent
+    conda install pip --yes --quiet | indent
 fi
 
 
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
-    conda install --file conda-requirements.txt --yes | indent
+    conda config --add channels https://conda.anaconda.org/faph
+    conda config --add channels https://conda.anaconda.org/openhydrology
+    conda install --file conda-requirements.txt --yes --quiet | indent
 fi
 
 puts-step "Cleaning up the installation environment."
