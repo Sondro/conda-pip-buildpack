@@ -1,6 +1,6 @@
 MINICONDA_VER=3.9.1
 
-if [ ! -d $BUILD_DIR/.heroku/miniconda ]; then
+if [ ! -d /app/.heroku/miniconda ]; then
     puts-step "Preparing Python3/Miniconda Environment ($MINICONDA_VER)"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
@@ -14,14 +14,10 @@ if [ ! -d $BUILD_DIR/.heroku/miniconda ]; then
     conda info --all | indent
 fi
 
+
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
     conda install --file conda-requirements.txt --quiet | indent
-fi
-
-if [ -f requirements.txt ]; then
-    puts-step "Installing dependencies using pip"
-    pip install -r requirements.txt | indent
 fi
 
 puts-step "Cleaning up the installation environment."
