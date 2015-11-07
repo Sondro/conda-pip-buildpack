@@ -5,14 +5,14 @@ if [ ! -d /app/.heroku/miniconda ]; then
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-
-    export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
-    conda config --set always_yes yes --set changeps1 no
-    conda update --quiet conda | indent
-    conda config --add channels https://conda.anaconda.org/faph
-    conda config --add channels https://conda.anaconda.org/openhydrology
-    conda info --all | indent
 fi
+
+export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
+conda config --set always_yes yes --set changeps1 no
+conda update --quiet conda | indent
+conda config --add channels https://conda.anaconda.org/faph
+conda config --add channels https://conda.anaconda.org/openhydrology
+conda info --all | indent
 
 
 if [ -f conda-requirements.txt ]; then
