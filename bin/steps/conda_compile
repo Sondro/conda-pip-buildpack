@@ -3,13 +3,13 @@ MINICONDA_VER=3.9.1
 if [ ! -d /app/.heroku/miniconda ]; then
     puts-step "Preparing Python3/Miniconda Environment ($MINICONDA_VER)"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
+    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 
-    export PATH="/app/.heroku/miniconda/bin:$PATH"
+    export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
     conda config --set always_yes yes --set changeps1 no
-    conda update --quiet conda
-    conda info --all
+    conda update --quiet conda | indent
+    conda info --all | indent
 
     #conda install pip --yes --quiet | indent
 fi
