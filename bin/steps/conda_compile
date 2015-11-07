@@ -6,7 +6,12 @@ if [ ! -d /app/.heroku/miniconda ]; then
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 
-    conda install pip --yes --quiet | indent
+    export PATH="/app/.heroku/miniconda/bin:$PATH"
+    conda config --set always_yes yes --set changeps1 no
+    conda update --quiet conda
+    conda info --all
+
+    #conda install pip --yes --quiet | indent
 fi
 
 

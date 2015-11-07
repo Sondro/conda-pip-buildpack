@@ -47,7 +47,7 @@ ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
 
 # Prepend proper path buildpack use.
-export PATH=$BUILD_DIR/.heroku/miniconda/bin:$PATH
+#export PATH=$BUILD_DIR/.heroku/miniconda/bin:$PATH
 export PYTHONUNBUFFERED=1
 export LANG=en_US.UTF-8
 
