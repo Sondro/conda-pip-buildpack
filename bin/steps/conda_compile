@@ -26,9 +26,9 @@ conda info --all | indent
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
     if [ ! -d $APP_PREFIX ]; then
-        conda create --prefix APP_PREFIX --file conda-requirements.txt --quiet | indent
+        conda create --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
     else
-        conda install --prefix APP_PREFIX --file conda-requirements.txt --quiet | indent
+        conda install --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
     fi
 fi
 
