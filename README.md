@@ -1,22 +1,15 @@
-Conda Buildpack
-===============
+Conda/pip buildpack
+===================
 
-This is a fork of Heroku build pack for conda (https://github.com/kennethreitz/conda-buildpack) that supports Python 3. It should be used in multi-buildpack setup together with Heroku's official build pack (see
-https://github.com/ddollar/heroku-buildpack-multi).
+Heroku buildpack to install Python applications using conda and pip.
 
-
-This buildpack enables the installation of binary packages through the
-open source [conda](http://conda.pydata.org/) application.  Conda is
-recognized as being core to Continuum's Anaconda Scientific Python distro
-but it's also at the heart of the lighter weight
-[Miniconda](http://conda.pydata.org/miniconda.html) distro which we use
-here to install _only_ the binary packages we need for our apps deployed
-on Heroku.
-
-To control what binary packages are installed by conda, supply a
-`conda-requirements.txt` file (which can be created by capturing the output
-of `conda list -e` for your working conda environment).
-Like when using the standard buildpack for python from Heroku, you can also
-still supply a `requirements.txt` file for [pip](https://github.com/pypa/pip)
-to process.  In this way, you can install binary packages via conda for
-everything you can and still use pip for anything you can't.
+1. List package requirements in a `conda-requirements.txt` file in the root
+   of the project. You can use `conda list -e` to get the info.
+2. Optionally, list any non-default conda channels in a 'conda-channels.txt`
+   file.
+3. Optionally, list any packages to be installed with pip in a 
+   `requirements.txt` file.
+4. Create a `.buildpacks` file and add a line with this repo's URL.
+5. Add the multi-buildpack (https://github.com/ddollar/heroku-buildpack-multi)
+   to project.
+6. Deploy to Heroku.
