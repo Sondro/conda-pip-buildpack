@@ -14,3 +14,7 @@ Heroku buildpack to install Python applications using conda and pip.
 5. Add the multi-buildpack (https://github.com/ddollar/heroku-buildpack-multi)
    to project.
 6. Deploy to Heroku.
+
+**Note**  
+Currently, this buildpack installs the application in the miniconda root
+environment (Python 3.4).
