@@ -1,8 +1,9 @@
 Conda/pip buildpack
 ===================
 
-Heroku buildpack to install Python applications using
-[conda](http://conda.pydata.org) and [pip](https://pypi.python.org).
+Heroku buildpack ([docs](https://devcenter.heroku.com/articles/buildpacks)) to
+install Python applications using [conda](http://conda.pydata.org) and
+[pip](https://pypi.python.org).
 
 1. List package requirements in a `conda-requirements.txt` file in the root of
    the project. You can use `conda list -e` to get the info.
@@ -11,15 +12,15 @@ Heroku buildpack to install Python applications using
 3. Optionally, list any packages to be installed with pip in a
    `requirements.txt` file.
 4. Create a `.buildpacks` file and add the line
-   `https://github.com/faph/conda-pip-buildpack.git`
+   `https://github.com/faph/conda-pip-buildpack.git#v1.0.0`. Leave out the tag
+   if you want to get the latest version.
 5. Add the [multi-buildpack](https://github.com/ddollar/heroku-buildpack-multi)
    to the project with
    `heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git`.
 6. Deploy to Heroku.
 
-**Note**
-Currently, this buildpack installs the application in the miniconda root
-environment (Python 3.4).
+**Note** Currently, this buildpack installs the application in the miniconda
+root environment (Python 3.4).
 
 Based on a [conda buildpack](https://github.com/kennethreitz/conda-buildpack)
 by Kenneth Reitz.
