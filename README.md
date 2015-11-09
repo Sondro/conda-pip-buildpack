@@ -20,3 +20,6 @@ Heroku buildpack to install Python applications using
 **Note**
 Currently, this buildpack installs the application in the miniconda root
 environment (Python 3.4).
+
+Based on a [conda buildpack](https://github.com/kennethreitz/conda-buildpack)
+by Kenneth Reitz.
