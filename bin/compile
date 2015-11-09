@@ -8,9 +8,6 @@
 # Fail fast and fail hard.
 set -eo pipefail
 
-# Prepend proper path for virtualenv hackery. This will be deprecated soon.
-#export PATH=:/usr/local/bin:$PATH
-
 # Paths.
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 ROOT_DIR=$(dirname $BIN_DIR)
@@ -45,11 +42,6 @@ deep-mv $BUILD_DIR $APP_DIR
 # Set new context.
 ORIG_BUILD_DIR=$BUILD_DIR
 BUILD_DIR=$APP_DIR
-
-# Prepend proper path buildpack use.
-#export PATH=$BUILD_DIR/.heroku/miniconda/bin:$PATH
-#export PYTHONUNBUFFERED=1
-#export LANG=en_US.UTF-8
 
 # Switch to the repo's context.
 cd $BUILD_DIR
