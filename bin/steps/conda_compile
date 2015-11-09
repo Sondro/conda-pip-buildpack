@@ -5,7 +5,7 @@ APP_PREFIX=$ROOT_PREFIX/envs/app_env
 if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p ROOT_PREFIX/ -b | indent
+    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $ROOT_PREFIX/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 fi
 
