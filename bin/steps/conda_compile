@@ -1,7 +1,7 @@
 MINICONDA_VER=latest
 ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
 APP_PREFIX=$ROOT_PREFIX/envs/app_env
-RUN_APP_PREFIX=$HOME/app/.heroku/miniconda/envs/app_env
+RUN_APP_PREFIX=$HOME/.heroku/miniconda/envs/app_env
 
 if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
