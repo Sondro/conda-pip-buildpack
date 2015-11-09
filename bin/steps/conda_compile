@@ -1,7 +1,6 @@
 MINICONDA_VER=latest
 ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
 APP_PREFIX=$ROOT_PREFIX/envs/app_env
-RUN_APP_PREFIX=$HOME/.heroku/miniconda/envs/app_env
 
 if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
@@ -42,7 +41,7 @@ puts-step "Cleaning up the installation environment."
 conda clean -pt > /dev/null
 
 # Set context environment variables.
-set-env PATH '$RUN_APP_PREFIX/bin:$PATH'
+set-env PATH '/app/.heroku/miniconda/envs/app_env/bin:$PATH'
 set-env PYTHONUNBUFFERED true
 set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
