@@ -1,6 +1,6 @@
 MINICONDA_VER=latest
 
-if [ ! -d /app/.heroku/miniconda ]; then
+if [ ! -d $BUILD_DIR/.heroku/miniconda ]; then
     puts-step "Installing Miniconda version $MINICONDA_VER"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
