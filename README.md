@@ -9,7 +9,8 @@ Heroku buildpack to install Python applications using conda and pip.
    file.
 3. Optionally, list any packages to be installed with pip in a 
    `requirements.txt` file.
-4. Create a `.buildpacks` file and add a line with this repo's URL.
+4. Create a `.buildpacks` file and add the line
+   `https://github.com/faph/conda-pip-buildpack.git`
 5. Add the multi-buildpack (https://github.com/ddollar/heroku-buildpack-multi)
    to project.
 6. Deploy to Heroku.
