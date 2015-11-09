@@ -1,4 +1,4 @@
-MINICONDA_VER=3.9.1
+MINICONDA_VER=latest
 
 if [ ! -d /app/.heroku/miniconda ]; then
     puts-step "Installing Miniconda version $MINICONDA_VER"
