@@ -14,7 +14,7 @@ conda update --quiet conda | indent
 
 if [ -f conda-channels.txt ]; then
     while read LINE; do
-        if [[ ! "$LINE" == *"#"* ]]; then
+        if [[ ! "$LINE" == "#"* ]]; then
             conda config --add channels $LINE
         fi
     done < "conda-channels.txt"
