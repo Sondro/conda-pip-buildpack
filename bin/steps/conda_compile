@@ -13,8 +13,10 @@ conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda | indent
 
 if [ -f conda-channels.txt ]; then
-    while read CHANNEL; do
-        conda config --add channels $CHANNEL
+    while read LINE; do
+        if [[ ! "$LINE" == *"#"* ]]; then
+            conda config --add channels $LINE
+        fi
     done < "conda-channels.txt"
 fi
 conda info --all | indent
