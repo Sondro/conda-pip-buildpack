@@ -1,14 +1,16 @@
 MINICONDA_VER=latest
+ROOT_PREFIX = $BUILD_DIR/.heroku/miniconda
+APP_PREFIX = $ROOT_PREFIX/envs/app_env
 
-if [ ! -d $BUILD_DIR/.heroku/miniconda ]; then
-    puts-step "Installing Miniconda version $MINICONDA_VER"
+if [ ! -d $ROOT_PREFIX ]; then
+    puts-step "Installing Miniconda (version $MINICONDA_VER)"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $BUILD_DIR/.heroku/miniconda/ -b | indent
+    bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p ROOT_PREFIX/ -b | indent
     rm -fr Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 fi
 
 puts-step "Configuring Miniconda"
-export PATH="$BUILD_DIR/.heroku/miniconda/bin:$PATH"
+export PATH="$ROOT_PREFIX/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda | indent
 
