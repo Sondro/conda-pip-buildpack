@@ -23,7 +23,7 @@ install Python applications using [conda](http://conda.pydata.org) and
 
 - The conda root environment is created at ``/app/.heroku/miniconda``.
 - The application's environment is created and activated at
-  ``/app/.heroku/miniconda/envs/app_env/``.
+  ``/app/.heroku/miniconda/envs/app_env``.
 
 Based on a [conda buildpack](https://github.com/kennethreitz/conda-buildpack)
 by Kenneth Reitz.
