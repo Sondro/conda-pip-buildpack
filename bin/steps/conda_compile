@@ -56,8 +56,8 @@ puts-step "Cleaning up the installation environment."
 conda clean -pt > /dev/null
 
 # Set context environment variables.
-set-env PATH '/app/.heroku/miniconda/envs/app_env/bin:$PATH'
+set-default-env PATH '/app/.heroku/miniconda/envs/app_env/bin'
 set-env PYTHONUNBUFFERED true
-set-default-env LANG en_US.UTF-8
-set-default-env PYTHONHASHSEED random
+set-env LANG en_US.UTF-8
+set-env PYTHONHASHSEED random
 set-env CONDA_DEFAULT_ENV $ENV_NAME
