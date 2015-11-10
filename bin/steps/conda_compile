@@ -25,7 +25,7 @@ if [ -f environment.yml ]; then
         conda env create --name $ENV_NAME --file environment.yml --quiet | indent
     else
         puts-step "Updating existing Conda environment"
-        conda env update --name $ENV_NAME --file environment.yml --quiet QUIET | indent
+        conda env update --name $ENV_NAME --file environment.yml --quiet True | indent
     fi
 
 else
