@@ -20,7 +20,23 @@ install Python applications using [conda](http://conda.pydata.org) and
 6. Deploy to Heroku.
 
 *Instead* of steps 1 to 3, you can also just provide an `environment.yml` file
-as per [conda env spec](https://github.com/conda/conda-env#environmentyml).
+like this:
+
+```yaml
+name: env  # anything goes
+channels:
+- custom_channel
+- ...
+dependencies:
+- python=3.4.*
+- other_conda_package
+- ...
+- pip:
+  - pip_package
+  - ...
+```
+
+See also the [conda env spec](https://github.com/conda/conda-env#environmentyml).
 
 **Notes**
 
