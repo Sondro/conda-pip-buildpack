@@ -1,6 +1,9 @@
+#!/usr/bin/env bash
+
 MINICONDA_VER=latest
 ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
-APP_PREFIX=$ROOT_PREFIX/envs/app_env
+ENV_NAME=app_env
+APP_PREFIX=$ROOT_PREFIX/envs/$ENV_NAME
 
 if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
@@ -12,29 +15,41 @@ fi
 puts-step "Configuring Miniconda"
 export PATH="$ROOT_PREFIX/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
-conda update --quiet conda | indent
-
-if [ -f conda-channels.txt ]; then
-    while read LINE; do
-        if [[ ! "$LINE" == "#"* ]]; then
-            conda config --add channels $LINE
-        fi
-    done < "conda-channels.txt"
-fi
+conda update --quiet conda conda-env | indent
 conda info --all | indent
 
-if [ -f conda-requirements.txt ]; then
-    puts-step "Installing dependencies using Conda"
-    if [ ! -d $APP_PREFIX ]; then
-        conda create --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
-    else
-        conda install --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
-    fi
-fi
+if [ -f environment.yml ]; then
 
-if [ -f requirements.txt ]; then
-    puts-step "Installing dependencies using pip"
-    $APP_PREFIX/bin/pip install -r requirements.txt | indent
+    if [ ! -d $APP_PREFIX ]; then
+        puts-step "Creating Conda environment"
+        conda env create --name $ENV_NAME --file environment.yml --quiet | indent
+    else
+        puts-step "Updating existing Conda environment"
+        conda env update --name $ENV_NAME --file environment.yml --quiet | indent
+    fi
+
+else
+
+    if [ -f conda-channels.txt ]; then
+        while read LINE; do
+            if [[ ! "$LINE" == "#"* ]]; then
+                conda config --add channels $LINE
+            fi
+        done < "conda-channels.txt"
+    fi
+    if [ -f conda-requirements.txt ]; then
+        puts-step "Installing dependencies using Conda"
+        if [ ! -d $APP_PREFIX ]; then
+            conda create --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
+        else
+            conda install --prefix $APP_PREFIX --file conda-requirements.txt --quiet | indent
+        fi
+    fi
+    if [ -f requirements.txt ]; then
+        puts-step "Installing dependencies using pip"
+        $APP_PREFIX/bin/pip install -r requirements.txt | indent
+    fi
+
 fi
 
 puts-step "Cleaning up the installation environment."
@@ -45,3 +60,4 @@ set-env PATH '/app/.heroku/miniconda/envs/app_env/bin:$PATH'
 set-env PYTHONUNBUFFERED true
 set-default-env LANG en_US.UTF-8
 set-default-env PYTHONHASHSEED random
+set-env CONDA_DEFAULT_ENV $ENV_NAME

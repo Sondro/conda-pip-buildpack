@@ -19,6 +19,9 @@ install Python applications using [conda](http://conda.pydata.org) and
    `heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git`.
 6. Deploy to Heroku.
 
+*Instead* of steps 1 to 3, you can also just provide an `environment.yml` file
+as per [conda env spec](https://github.com/conda/conda-env#environmentyml).
+
 **Notes**
 
 - The conda root environment is created at ``/app/.heroku/miniconda``.
