@@ -14,9 +14,9 @@ install Python applications using [conda](http://conda.pydata.org) and
 4. Create a `.buildpacks` file and add the line:  
    `https://github.com/faph/conda-pip-buildpack.git#v1.1.0`  
    Leave out the tag if you want to get the latest version each time.
-5. Add the [multi-buildpack](https://github.com/ddollar/heroku-buildpack-multi)
+5. Add the [multi-buildpack](https://github.com/heroku/heroku-buildpack-multi)
    to the project with  
-   `heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git`.
+   `heroku buildpacks:set https://github.com/heroku/heroku-buildpack-multi.git`.
 6. Deploy to Heroku.
 
 *Instead* of steps 1 to 3, you can also just provide an `environment.yml` file
