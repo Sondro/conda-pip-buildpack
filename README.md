@@ -12,7 +12,7 @@ install Python applications using [conda](http://conda.pydata.org) and
 3. Optionally, list any packages to be installed with pip in a
    `requirements.txt` file.
 4. Create a `.buildpacks` file and add the line:  
-   `https://github.com/faph/conda-pip-buildpack.git#v1.1.0`  
+   `https://github.com/faph/conda-pip-buildpack.git#v1.2.0`  
    Leave out the tag if you want to get the latest version each time.
 5. Add the [multi-buildpack](https://github.com/heroku/heroku-buildpack-multi)
    to the project with  
@@ -25,14 +25,14 @@ like this:
 ```yaml
 name: env  # anything goes
 channels:
-- custom_channel
+- custom-channel
 - ...
 dependencies:
 - python=3.4.*
-- other_conda_package
+- other-conda-package
 - ...
 - pip:
-  - pip_package
+  - pip-package
   - ...
 ```
 
