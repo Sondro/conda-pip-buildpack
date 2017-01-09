@@ -6,12 +6,19 @@
 
 set -eo pipefail
 
-# Paths.
+echo "-----> Setting up buildpack."
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 ROOT_DIR=$(dirname $BIN_DIR)
 BUILD_DIR="${1}"
 CACHE_DIR="${2}"
 ENV_DIR="${3}"
+APP_DIR='/app'
+echo "BIN_DIR:   ${BIN_DIR}"
+echo "ROOT_DIR:  ${ROOT_DIR}"
+echo "BUILD_DIR: ${BUILD_DIR}"
+echo "CACHE_DIR: ${CACHE_DIR}"
+echo "ENV_DIR:   ${ENV_DIR}"
+echo "APP_DIR:   ${APP_DIR}"
 
 CACHED_DIRS=".heroku"
 
@@ -21,14 +28,10 @@ mkdir -p $(dirname $PROFILE_PATH)
 
 # Sanitizing environment variables.
 unset GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
-
 # We'll need to send these statics to other scripts we `source`.
 export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
 
-# Syntax sugar.
 source $BIN_DIR/utils
-
-APP_DIR='/app'
 
 # Copy Application code in.
 deep-mv $BUILD_DIR $APP_DIR
