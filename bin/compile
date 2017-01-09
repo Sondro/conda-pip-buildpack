@@ -6,21 +6,19 @@
 
 set -eo pipefail
 
-echo "-----> Setting up buildpack."
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+source $BIN_DIR/utils
+puts-step "Setting up buildpack."
+
 ROOT_DIR=$(dirname $BIN_DIR)
 BUILD_DIR="${1}"
 CACHE_DIR="${2}"
 ENV_DIR="${3}"
-APP_DIR='/app'
 echo "BIN_DIR:   ${BIN_DIR}"
 echo "ROOT_DIR:  ${ROOT_DIR}"
 echo "BUILD_DIR: ${BUILD_DIR}"
 echo "CACHE_DIR: ${CACHE_DIR}"
 echo "ENV_DIR:   ${ENV_DIR}"
-echo "APP_DIR:   ${APP_DIR}"
-
-CACHED_DIRS=".heroku"
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/miniconda.sh"
 # Make profile.d directory.
@@ -31,7 +29,6 @@ unset GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
 # We'll need to send these statics to other scripts we `source`.
 export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
 
-source $BIN_DIR/utils
 
 cd $BUILD_DIR
 source $BIN_DIR/compile_conda
