@@ -52,6 +52,8 @@ else
 
 fi
 
+conda list | indent
+
 puts-step "Cleaning up the installation environment."
 conda clean -pt > /dev/null
 
