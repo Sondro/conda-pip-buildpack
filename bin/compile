@@ -1,34 +1,28 @@
 #!/usr/bin/env bash
-
-# Usage:
-#
-#     $ bin/compile <build-dir> <cache-dir> <env_dir>
+# bin/compile <build-dir> <cache-dir> <env_dir>
 
 set -eo pipefail
 
-BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
+BIN_DIR=$(cd $(dirname $0); pwd)
 source $BIN_DIR/utils
+
 puts-step "Setting up buildpack."
 
-ROOT_DIR=$(dirname $BIN_DIR)
 BUILD_DIR="${1}"
 CACHE_DIR="${2}"
 ENV_DIR="${3}"
-echo "BIN_DIR:   ${BIN_DIR}"
-echo "ROOT_DIR:  ${ROOT_DIR}"
-echo "BUILD_DIR: ${BUILD_DIR}"
-echo "CACHE_DIR: ${CACHE_DIR}"
-echo "ENV_DIR:   ${ENV_DIR}"
+cd $BUILD_DIR
 
-PROFILE_PATH="$BUILD_DIR/.profile.d/miniconda.sh"
-# Make profile.d directory.
+echo "BIN_DIR:   ${BIN_DIR}"   | indent
+echo "BUILD_DIR: ${BUILD_DIR}" | indent
+echo "CACHE_DIR: ${CACHE_DIR}" | indent
+echo "ENV_DIR:   ${ENV_DIR}"   | indent
+
+# Setting up profile dir
+PROFILE_PATH="$BUILD_DIR/.profile.d/conda.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 
-# Sanitizing environment variables.
-unset GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
-# We'll need to send these statics to other scripts we `source`.
+unset  GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
 export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
 
-
-cd $BUILD_DIR
 source $BIN_DIR/compile_conda
