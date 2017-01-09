@@ -17,6 +17,7 @@ echo "BIN_DIR:   ${BIN_DIR}"   | indent
 echo "BUILD_DIR: ${BUILD_DIR}" | indent
 echo "CACHE_DIR: ${CACHE_DIR}" | indent
 echo "ENV_DIR:   ${ENV_DIR}"   | indent
+echo "XDG_CACHE_HOME": ${XDG_CACHE_HOME}" | indent
 
 # Setting up profile dir
 PROFILE_PATH="$BUILD_DIR/.profile.d/conda.sh"
