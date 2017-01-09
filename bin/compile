@@ -58,10 +58,8 @@ set +e
 mkdir .heroku &> /dev/null
 set -e
 
-# Actuall do the conda steps.
-source $BIN_DIR/steps/conda_compile
+source $BIN_DIR/compile_conda
 
-# ### Finalize
 
 # Store new artifacts in cache.
 for dir in $CACHED_DIRS; do
