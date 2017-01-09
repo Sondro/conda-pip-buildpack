@@ -9,7 +9,10 @@ if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
     pushd $CACHE_DIR
     if [ ! -f Miniconda3-$MINICONDA_VER-Linux-x86_64.sh ]; then
+        echo "Downloading Miniconda installer" | indent
         curl -Os https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
+    else
+        echo "Running Miniconda installer from cache" | indent
     fi
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $ROOT_PREFIX/ -b | indent
     popd
