@@ -10,7 +10,7 @@ if [ ! -d $ROOT_PREFIX ]; then
     pushd $CACHE_DIR
     if [ ! -f Miniconda3-$MINICONDA_VER-Linux-x86_64.sh ]; then
         curl -Os https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-    ]
+    fi
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $ROOT_PREFIX/ -b | indent
     popd
 fi
