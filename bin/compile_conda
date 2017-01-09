@@ -18,6 +18,8 @@ conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda conda-env | indent
 conda info --all | indent
 
+export PIP_DOWNLOAD_CACHE="$CACHE_DIR/pip"
+
 if [ -f environment.yml ]; then
 
     if [ ! -d $APP_PREFIX ]; then
