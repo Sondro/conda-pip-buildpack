@@ -23,8 +23,7 @@ echo "APP_DIR:   ${APP_DIR}"
 CACHED_DIRS=".heroku"
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/miniconda.sh"
-# Make profile.d directory.
-mkdir -p $(dirname $PROFILE_PATH)
+
 
 # Sanitizing environment variables.
 unset GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
@@ -42,6 +41,9 @@ BUILD_DIR=$APP_DIR
 
 # Switch to the repo's context.
 cd $BUILD_DIR
+
+# Make profile.d directory.
+mkdir -p $(dirname $PROFILE_PATH)
 
 # ### The Cache
 mkdir -p $CACHE_DIR
