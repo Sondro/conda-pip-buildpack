@@ -45,26 +45,4 @@ cd $BUILD_DIR
 # Make profile.d directory.
 mkdir -p $(dirname $PROFILE_PATH)
 
-# ### The Cache
-mkdir -p $CACHE_DIR
-
-# Restore old artifacts from the cache.
-for dir in $CACHED_DIRS; do
-  cp -R $CACHE_DIR/$dir . &> /dev/null || true
-done
-
-set +e
-# Create set-aside `.heroku` folder.
-mkdir .heroku &> /dev/null
-set -e
-
 source $BIN_DIR/compile_conda
-
-
-# Store new artifacts in cache.
-for dir in $CACHED_DIRS; do
-  rm -rf $CACHE_DIR/$dir
-  cp -R $dir $CACHE_DIR/
-done
-
-deep-mv $BUILD_DIR $ORIG_BUILD_DIR
