@@ -20,8 +20,8 @@ echo "ENV_DIR:   ${ENV_DIR}"   | indent
 echo "HOME:      ${HOME}"      | indent  # /app
 
 # Switch to /app dir
-deep-cp "${BUILD_DIR}" "${HOME}"
-BUILD_DIR="${HOME}"
+#deep-cp "${BUILD_DIR}" "${HOME}"
+#BUILD_DIR="${HOME}"
 cd $BUILD_DIR
 
 # Setting up profile dir
