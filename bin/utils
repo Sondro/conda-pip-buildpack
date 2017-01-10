@@ -64,6 +64,6 @@ start-build-in-dir() {
 
 # Usage: $ end-build-in-dir
 end-build-in-dir() {
-  echo "Finish building in ${$BUILD_DIR}." | indent
+  echo "Finish building in ${BUILD_DIR}." | indent
   deep-mv "${BUILD_DIR}" "${ORIG_BUILD_DIR}"
 }
