@@ -11,6 +11,7 @@ puts-step "Setting up buildpack."
 BUILD_DIR="${1}"
 CACHE_DIR="${2}"
 ENV_DIR="${3}"
+XDG_CACHE_HOME="${CACHE_DIR}"
 cd $BUILD_DIR
 
 echo "BIN_DIR:   ${BIN_DIR}"   | indent
@@ -24,6 +25,6 @@ PROFILE_PATH="$BUILD_DIR/.profile.d/conda.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 
 unset  GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
-export BUILD_DIR CACHE_DIR BIN_DIR PROFILE_PATH
+export BUILD_DIR CACHE_DIR XDG_CACHE_HOME BIN_DIR PROFILE_PATH
 
 source $BIN_DIR/compile_conda
