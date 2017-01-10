@@ -12,13 +12,17 @@ BUILD_DIR="${1}"
 CACHE_DIR="${2}"
 ENV_DIR="${3}"
 XDG_CACHE_HOME="${CACHE_DIR}"
-cd $BUILD_DIR
 
 echo "BIN_DIR:   ${BIN_DIR}"   | indent
 echo "BUILD_DIR: ${BUILD_DIR}" | indent
 echo "CACHE_DIR: ${CACHE_DIR}" | indent
 echo "ENV_DIR:   ${ENV_DIR}"   | indent
-echo "HOME:      ${HOME}"      | indent
+echo "HOME:      ${HOME}"      | indent  # /app
+
+# Switch to /app dir
+deep-cp "${BUILD_DIR}" "${HOME}"
+BUILD_DIR="${HOME}"
+cd $BUILD_DIR
 
 # Setting up profile dir
 PROFILE_PATH="$BUILD_DIR/.profile.d/conda.sh"
