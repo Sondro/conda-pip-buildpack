@@ -57,6 +57,8 @@ function deep-mv (){
 start-build-in-dir() {
   echo "Start building in ${1}." | indent
   ORIG_BUILD_DIR=${BUILD_DIR}
+  cd "${ORIG_BUILD_DIR}"
+  ls -al
   BUILD_DIR=${1}
   deep-mv "${ORIG_BUILD_DIR}" "${BUILD_DIR}"
   cd "${BUILD_DIR}"
