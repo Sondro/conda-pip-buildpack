@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 MINICONDA_VER=latest
-ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
+ROOT_PREFIX=$BUILD_DIR/miniconda
 ENV_NAME=app_env
 APP_PREFIX=$ROOT_PREFIX/envs/$ENV_NAME
 
@@ -23,8 +23,6 @@ export PATH="$ROOT_PREFIX/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda conda-env | indent
 conda info --all | indent
-
-export PIP_DOWNLOAD_CACHE="$CACHE_DIR/pip"
 
 if [ -f environment.yml ]; then
 
@@ -66,7 +64,7 @@ puts-step "Cleaning up the installation environment."
 conda clean -iltp > /dev/null
 
 # Set context environment variables.
-set-env PATH '/app/.heroku/miniconda/envs/app_env/bin:$PATH'
+set-env PATH "$APP_PREFIX/bin:$PATH"
 set-env PYTHONUNBUFFERED true
 set-env LANG en_US.UTF-8
 set-env PYTHONHASHSEED random
