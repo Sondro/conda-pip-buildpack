@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 MINICONDA_VER=latest
-ROOT_PREFIX=$BUILD_DIR/miniconda
+ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
 ENV_NAME=app_env
 APP_PREFIX=$ROOT_PREFIX/envs/$ENV_NAME
 
 if [ ! -d $ROOT_PREFIX ]; then
     puts-step "Installing Miniconda (version $MINICONDA_VER)"
-    pushd $CACHE_DIR
+    pushd $CACHE_DIR > /dev/null
     if [ ! -f Miniconda3-$MINICONDA_VER-Linux-x86_64.sh ]; then
         echo "Downloading Miniconda installer" | indent
         curl -Os https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
@@ -15,7 +15,7 @@ if [ ! -d $ROOT_PREFIX ]; then
         echo "Running Miniconda installer from cache" | indent
     fi
     bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $ROOT_PREFIX/ -b | indent
-    popd
+    popd > /dev/null
 fi
 
 puts-step "Configuring Miniconda"
@@ -64,7 +64,7 @@ puts-step "Cleaning up the installation environment."
 conda clean -iltp > /dev/null
 
 # Set context environment variables.
-set-env PATH "$APP_PREFIX/bin:$PATH"
+set-env PATH '/app/.heroku/miniconda/envs/app_env/bin:$PATH'
 set-env PYTHONUNBUFFERED true
 set-env LANG en_US.UTF-8
 set-env PYTHONHASHSEED random
