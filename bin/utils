@@ -58,8 +58,8 @@ start-build-in-dir() {
   echo "Start building in ${1}." | indent
   ORIG_BUILD_DIR=${BUILD_DIR}
   BUILD_DIR=${1}
-  cd "${BUILD_DIR}"
-  ls -al
+  mkdir /tmp/home
+  deep-mv "${HOME}" /tmp/home
   deep-mv "${ORIG_BUILD_DIR}" "${BUILD_DIR}"
   cd "${BUILD_DIR}"
 }
@@ -68,4 +68,5 @@ start-build-in-dir() {
 end-build-in-dir() {
   echo "Finish building in ${BUILD_DIR}." | indent
   deep-mv "${BUILD_DIR}" "${ORIG_BUILD_DIR}"
+  deep-mv /tmp/home "${HOME}"
 }
