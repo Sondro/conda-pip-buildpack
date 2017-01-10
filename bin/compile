@@ -32,3 +32,7 @@ unset  GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
 export BUILD_DIR CACHE_DIR XDG_CACHE_HOME BIN_DIR PROFILE_PATH
 
 source $BIN_DIR/compile_conda
+
+puts-step "Verifying .profile.d"
+echo "PROFILE_PATH: ${PROFILE_PATH}" | indent
+cat "${PROFILE_PATH}" | indent
