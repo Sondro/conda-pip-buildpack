@@ -19,10 +19,7 @@ echo "CACHE_DIR: ${CACHE_DIR}" | indent
 echo "ENV_DIR:   ${ENV_DIR}"   | indent
 echo "HOME:      ${HOME}"      | indent  # /app
 
-ORIG_BUILD_DIR=${BUILD_DIR}
-BUILD_DIR=${HOME}
-deep-mv "${ORIG_BUILD_DIR}" "${BUILD_DIR}"
-cd $BUILD_DIR
+start-build-in-dir ${HOME}
 
 # Setting up profile dir
 PROFILE_PATH="$BUILD_DIR/.profile.d/conda.sh"
@@ -37,4 +34,4 @@ puts-step "Verifying .profile.d"
 echo "PROFILE_PATH: ${PROFILE_PATH}" | indent
 cat "${PROFILE_PATH}" | indent
 
-deep-mv $BUILD_DIR $ORIG_BUILD_DIR
+end-build-in-dir

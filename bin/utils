@@ -52,3 +52,18 @@ function deep-mv (){
   rm -fr $1/!(tmp)
   find -H $1 -maxdepth 1 -name '.*' -a \( -type d -o -type f -o -type l \) -exec rm -fr '{}' \;
 }
+
+# Usage: $ start-build-in-dir ${HOME}
+start-build-in-dir() {
+  echo "Start building in ${1}." | indent
+  ORIG_BUILD_DIR=${BUILD_DIR}
+  BUILD_DIR=${1}
+  deep-mv "${ORIG_BUILD_DIR}" "${BUILD_DIR}"
+  cd "${BUILD_DIR}"
+}
+
+# Usage: $ end-build-in-dir
+end-build-in-dir() {
+  echo "Finish building in ${$BUILD_DIR}." | indent
+  deep-mv "${BUILD_DIR}" "${ORIG_BUILD_DIR}"
+}
