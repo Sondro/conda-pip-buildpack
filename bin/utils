@@ -24,12 +24,19 @@ function puts-warn (){
   echo " !     $@"
 }
 
-# Initialize profile file in .profile.d/
-# Usage: $ init-profile-file conda.sh
+# Initialise profile file in .profile.d/
+# Usage: $ init-profile-file "conda.sh"
 init-profile-file() {
   PROFILE_PATH="${BUILD_DIR}/.profile.d/${1}"
   export PROFILE_PATH
   mkdir -p $(dirname $PROFILE_PATH)
+  echo "Initialised profile file at ${PROFILE_PATH}" | indent
+}
+
+# Usage: $ echo-profile-file
+echo-profile-file() {
+  echo "Content of ${PROFILE_PATH}:" | indent
+  cat "${PROFILE_PATH}" | indent
 }
 
 # Usage: $ set-env key value

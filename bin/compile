@@ -20,7 +20,6 @@ echo "ENV_DIR:   ${ENV_DIR}"   | indent
 echo "HOME:      ${HOME}"      | indent  # /app
 
 start-build-in-dir "${HOME}"
-
 init-profile-file "conda.sh"
 
 unset  GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
@@ -28,8 +27,5 @@ export BUILD_DIR CACHE_DIR XDG_CACHE_HOME BIN_DIR
 
 source $BIN_DIR/compile_conda
 
-puts-step "Verifying .profile.d"
-echo "PROFILE_PATH: ${PROFILE_PATH}" | indent
-cat "${PROFILE_PATH}" | indent
-
+echo-profile-file
 end-build-in-dir
