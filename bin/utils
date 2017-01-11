@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 shopt -s extglob
 
 [ $(uname) == "Darwin" ] && SED_FLAG='-l' || SED_FLAG='-u'
@@ -25,7 +26,7 @@ function puts-warn (){
 
 # Initialize profile file in .profile.d/
 # Usage: $ init-profile-file conda.sh
-init-profile-file-() {
+init-profile-file() {
   PROFILE_PATH="${BUILD_DIR}/.profile.d/${1}"
   export PROFILE_PATH
   mkdir -p $(dirname $PROFILE_PATH)
