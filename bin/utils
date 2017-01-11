@@ -23,6 +23,14 @@ function puts-warn (){
   echo " !     $@"
 }
 
+# Initialize profile file in .profile.d/
+# Usage: $ init-profile-file conda.sh
+init-profile-file-() {
+  PROFILE_PATH="${BUILD_DIR}/.profile.d/${1}"
+  export PROFILE_PATH
+  mkdir -p $(dirname $PROFILE_PATH)
+}
+
 # Usage: $ set-env key value
 function set-env (){
   echo "export $1=$2" >> $PROFILE_PATH
@@ -53,7 +61,7 @@ function deep-mv (){
   find -H $1 -maxdepth 1 -name '.*' -a \( -type d -o -type f -o -type l \) -exec rm -fr '{}' \;
 }
 
-# Usage: $ start-build-in-dir ${HOME}
+# Usage: $ start-build-in-dir "${HOME}"
 start-build-in-dir() {
   echo "Start building in ${1}." | indent
   ORIG_BUILD_DIR=${BUILD_DIR}
