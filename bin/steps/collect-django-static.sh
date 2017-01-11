@@ -4,7 +4,7 @@ set +e
 
 if [ -f manage.py ]; then
   puts-step "Collecting Django static files."
-  python manage.py collectstatic --link --noinput
+  python manage.py collectstatic --link --noinput | indent
 fi
 
 set -e
