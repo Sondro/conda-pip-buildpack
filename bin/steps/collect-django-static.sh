@@ -2,6 +2,6 @@
 
 
 if [ -f manage.py ]; then
-  put-steps "Collecting Django static files."
+  puts-step "Collecting Django static files."
   python manage.py collectstatic --link --noinput
 fi
