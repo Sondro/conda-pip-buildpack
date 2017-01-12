@@ -34,11 +34,19 @@ packages in a `requirements.txt` file (optional) and non-default conda channels
 in a `conda-channels.txt` file.
 
 
-**Notes**
+Slug compilation
+----------------
 
-- The conda root environment is created at ``/app/.heroku/miniconda``.
+- The conda root environment is created at `/app/.heroku/miniconda`.
 - The application's environment is created and activated at
-  ``/app/.heroku/miniconda/envs/app_env``.
+  `/app/.heroku/miniconda/envs/app_env`.
+- The application itself is installed in `/app`.
+
+
+Copyrights
+----------
 
 Based on a [conda buildpack](https://github.com/kennethreitz/conda-buildpack)
 by Kenneth Reitz.
+
+Licensed under the [MIT licence](LICENSE).
