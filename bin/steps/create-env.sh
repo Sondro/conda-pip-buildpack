@@ -44,7 +44,7 @@ conda list --name $ENV_NAME | indent
 conda clean -iltp > /dev/null
 
 # Set context environment variables.
-export PATH="${HOME}/.heroku/miniconda/envs/${ENV_NAME}/bin:$PATH"
+export PATH="${HOME}/.heroku/miniconda/envs/${ENV_NAME}/bin:${PATH}"  # /app/.heroku/... !
 export CONDA_DEFAULT_ENV=$ENV_NAME
-set-env PATH "${HOME}/.heroku/miniconda/envs/${ENV_NAME}/bin:$PATH"  # /app/.heroku/... !
+set-env PATH "${PATH}"
 set-env CONDA_DEFAULT_ENV $ENV_NAME
