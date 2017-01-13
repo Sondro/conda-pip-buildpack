@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-MINICONDA_VER=latest
+URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
 
-puts-step "Installing Miniconda (version $MINICONDA_VER)"
+puts-step "Installing Miniconda"
 
 pushd $CACHE_DIR > /dev/null
-curl --output conda-installer.sh --time-cond conda-installer.sh --silent \
-    https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  | indent
+curl --output conda-installer.sh --time-cond conda-installer.sh --silent $URL | indent
 bash conda-installer.sh  -p $ROOT_PREFIX/ -b | indent
 popd > /dev/null
 
