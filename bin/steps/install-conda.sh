@@ -6,13 +6,9 @@ ROOT_PREFIX=$BUILD_DIR/.heroku/miniconda
 puts-step "Installing Miniconda (version $MINICONDA_VER)"
 
 pushd $CACHE_DIR > /dev/null
-if [ ! -f Miniconda3-$MINICONDA_VER-Linux-x86_64.sh ]; then
-    echo "Downloading Miniconda installer" | indent
-    curl -Os https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-else
-    echo "Running Miniconda installer from cache" | indent
-fi
-bash Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  -p $ROOT_PREFIX/ -b | indent
+curl --output conda-installer.sh --time-cond conda-installer.sh --silent \
+    https://repo.continuum.io/miniconda/Miniconda3-$MINICONDA_VER-Linux-x86_64.sh  | indent
+bash conda-installer.sh  -p $ROOT_PREFIX/ -b | indent
 popd > /dev/null
 
 
@@ -22,3 +18,7 @@ export PATH="$ROOT_PREFIX/bin:$PATH"
 conda config --set always_yes yes --set changeps1 no
 conda update --quiet conda conda-env | indent
 conda info --all | indent
+
+set-env PYTHONUNBUFFERED true
+set-env LANG en_US.UTF-8
+set-env PYTHONHASHSEED random
