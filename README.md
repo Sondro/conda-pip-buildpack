@@ -8,10 +8,10 @@ install Python applications using [conda](http://conda.pydata.org) and
 Configure this buildpack on your Heroku application like this:
 
 ```bash
-heroku buildpacks:set https://github.com/faph/conda-pip-buildpack.git#v1.2.1
+heroku buildpacks:set https://github.com/faph/conda-pip-buildpack.git#v1.3.0
 ```
 
-Then, in the root of your repo, create an `environment.yml` file like this:
+Then, in the root of your project, create an `environment.yml` file like this:
 
 ```yaml
 name: env  # anything goes
@@ -38,9 +38,12 @@ Slug compilation
 ----------------
 
 - The conda root environment is created at `/app/.heroku/miniconda`.
-- The application's environment is created and activated at
+- The application’s environment is created and activated at
   `/app/.heroku/miniconda/envs/app_env`.
 - The application itself is installed in `/app`.
+- Django static files are collected (symlinked) if a `manage.py` file exists in
+  the project’s root. If the constant `STATIC_ROOT` is not defined, this will
+  silently fail.
 
 
 Copyrights
