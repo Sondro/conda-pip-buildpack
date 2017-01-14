@@ -19,7 +19,7 @@ echo "CACHE_DIR: ${CACHE_DIR}" | indent
 echo "ENV_DIR:   ${ENV_DIR}"   | indent
 echo "HOME:      ${HOME}"      | indent  # /app
 
-start-build-in-dir "${HOME}"
+start-build-in-home
 init-profile-file "conda.sh"
 
 unset  GIT_DIR PYTHONHOME PYTHONPATH LD_LIBRARY_PATH LIBRARY_PATH
@@ -30,4 +30,4 @@ source $BIN_DIR/steps/create-env.sh
 source $BIN_DIR/steps/collect-django-static.sh
 
 echo-profile-file
-end-build-in-dir
+finish-build-in-home

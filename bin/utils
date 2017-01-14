@@ -3,7 +3,7 @@ shopt -s extglob
 
 [ $(uname) == "Darwin" ] && SED_FLAG='-l' || SED_FLAG='-u'
 
-# Syntax sugar.
+# Indent output as per Heroku style guide.
 indent() {
   RE="s/^/       /"
   sed $SED_FLAG "$RE"
@@ -58,7 +58,6 @@ function un-set-env (){
 function deep-cp (){
   find -H $1 -maxdepth 1 -name '.*' -a \( -type d -o -type f -o -type l \) -exec cp -a '{}' $2 \;
   cp -r $1/!(tmp) $2
-  # echo copying $1 to $2
 }
 
 # Does some serious moving.
@@ -69,19 +68,28 @@ function deep-mv (){
   find -H $1 -maxdepth 1 -name '.*' -a \( -type d -o -type f -o -type l \) -exec rm -fr '{}' \;
 }
 
-# Usage: $ start-build-in-dir "${HOME}"
-start-build-in-dir() {
-  echo "Start building in ${1}." | indent
+# Tweak directories to build the app in the home directory (/app) instead of 
+# Heroku's build directory.
+# 
+# Moves existing content in home to /tmp/home and moves build directory content 
+# to the home directory. Use this at the beginning of the build process.
+start-build-in-home() {
+  echo "Start building in ${HOME}." | indent
   ORIG_BUILD_DIR=${BUILD_DIR}
-  BUILD_DIR=${1}
-  mkdir /tmp/home
+  # Re-set $BUILD_DIR!
+  BUILD_DIR=${HOME}
+  mkdir -p /tmp/home
   deep-mv "${HOME}" /tmp/home
   deep-mv "${ORIG_BUILD_DIR}" "${BUILD_DIR}"
   cd "${BUILD_DIR}"
 }
 
-# Usage: $ end-build-in-dir
-end-build-in-dir() {
+# Restore build directory tweaks.
+#
+# Moves home directory content back to Heroku's build directory (otherwise it
+# won't be packaged up) and move /tmp/home back to home directory. Use this 
+# at the end of the build process.
+finish-build-in-home() {
   echo "Finish building in ${BUILD_DIR}." | indent
   deep-mv "${BUILD_DIR}" "${ORIG_BUILD_DIR}"
   deep-mv /tmp/home "${HOME}"
